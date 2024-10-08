@@ -4,6 +4,7 @@
 
 <form method="post" use:enhance enctype="multipart/form-data">
 <div id="dropzone">
+  <!-- TODO: how to set input name?? -->
 <Dropzone on:drop={handleFilesSelect} multiple={true} accept=".csv, .xlsx" inputElement="fileToUpload">
   <p>Drop All Attendance Files Here</p>
   </Dropzone>
