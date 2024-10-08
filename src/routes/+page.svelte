@@ -2,20 +2,30 @@
 <h1>NPU Attendance Analyzer</h1>
 <p>Drop attendance files in the dropzone below:</p>
 
+<form method="post" use:enhance enctype="multipart/form-data">
 <div id="dropzone">
-<Dropzone on:drop={handleFilesSelect} multiple={true} accept=".csv, .xlsx"/>
+<Dropzone on:drop={handleFilesSelect} multiple={true} accept=".csv, .xlsx" inputElement="fileToUpload">
+  <p>Drop All Attendance Files Here</p>
+  </Dropzone>
 </div>
-
-<button>Analyze</button>
+<button type="submit">Analyze</button>
+</form>
 
 <ol>
   {#each files.accepted as item}
     <li>{item.name}</li>
   {/each}
 </ol>
+
+{#if form?.body || form?.message}
+  <h2>{form?.message}</h2>
+  <!-- <pre>{JSON.stringify(form, null, 2)}</pre> -->
+{/if}
 </main>
 
 <script>
+  import { enhance } from "$app/forms";
+  export let form
   import Dropzone from "svelte-file-dropzone";
 
   let files = {
